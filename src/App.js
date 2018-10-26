@@ -1,25 +1,43 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import TodoList from "./components/TodoList/TodoList";
+import NewTodo from "./components/NewTodo/NewTodo";
 
 class App extends Component {
+  state = { todolist: [] };
+
+  updateMainList = todolist => {
+    this.setState({
+      todolist: todolist
+    });
+  };
+
+  updateStatus = item => {
+    const updatedList = this.state.todolist.map(todo => {
+      return item.id === todo.id
+        ? { ...todo, completed: !todo.completed }
+        : todo;
+    });
+    this.setState({
+      todolist: updatedList
+    });
+  };
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <NewTodo
+          updateMainList={this.updateMainList}
+          todolist={this.state.todolist}
+        />
+        <TodoList
+          todolist={this.state.todolist}
+          updateStatus={this.updateStatus}
+        />
+        <TodoList
+          todolist={this.state.todolist}
+          updateStatus={this.updateStatus}
+          showCompleted={true}
+        />
       </div>
     );
   }

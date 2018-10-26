@@ -1,0 +1,12 @@
+.TodoList {
+  margin: 20px;
+  width: 287px;
+}
+
+.TodoList ul {
+  padding: 0px;
+}
+
+.TodoList li {
+  list-style: none;
+}
