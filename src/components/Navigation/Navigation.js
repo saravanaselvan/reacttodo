@@ -12,6 +12,8 @@ const Navigation = props => {
           <Link to="/about/">About</Link>
         </li>
       </ul>
+      <button type="button" onClick={props.login}>Log In</button>
+      <button type="button" onClick={props.logout}>Log Out</button>
     </nav>
   );
 };

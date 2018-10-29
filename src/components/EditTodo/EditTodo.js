@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-const todoDB = window.firebase.database().ref("todos");
+import { todoDB } from "../../config/firebase";
+
 let todo;
 
 class EditTodo extends Component {

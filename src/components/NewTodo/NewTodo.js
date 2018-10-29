@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./NewTodo.css";
-
-const todoDB = window.firebase.database().ref("todos");
+import { todoDB } from "../../config/firebase";
 
 class NewTodo extends Component {
   state = { todo: "" };

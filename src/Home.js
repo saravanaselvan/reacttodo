@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import TodoList from "./components/TodoList/TodoList";
 import NewTodo from "./components/NewTodo/NewTodo";
-const todoDB = window.firebase.database().ref("todos");
+import { todoDB } from "./config/firebase";
+
 
 class Home extends Component {
   state = { todolist: [] };
