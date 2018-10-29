@@ -1,17 +1,22 @@
 import React, { Component } from "react";
 import "./NewTodo.css";
 
+const todoDB = window.firebase.database().ref("todos");
+
 class NewTodo extends Component {
   state = { todo: "" };
 
   addTodo = event => {
     event.preventDefault();
     const todolist = this.props.todolist.map(item => item);
-    todolist.push({
+    const todo = {
       id: Math.floor(Math.random() * 100),
       title: this.state.todo,
       completed: false
-    });
+    };
+    todolist.push(todo);
+    todoDB.push(todo);
+
     this.setState({
       todolist: todolist,
       todo: ""
@@ -26,19 +31,21 @@ class NewTodo extends Component {
   };
 
   render() {
+    const buttonClass = !this.state.todo ? "button-disabled" : "";
     return (
       <div className="NewTodo">
         <form onSubmit={this.addTodo}>
           <input
+            className="right-button"
             type="text"
             value={this.state.todo}
             onChange={this.updateTodo}
           />
           <button
+            className={`right-add-on ${buttonClass}`.trim()}
             type="submit"
             onClick={this.addTodo}
             disabled={!this.state.todo}
-            className={!this.state.todo ? "button-disabled" : ""}
           >
             Add
           </button>

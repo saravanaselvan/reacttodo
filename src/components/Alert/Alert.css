@@ -1,0 +1,10 @@
+.Alert {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  border: 1px solid green;
+  color: green;
+  margin: 10px;
+  border-radius: 5px;
+}

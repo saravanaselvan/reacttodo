@@ -1,44 +1,41 @@
 import React, { Component } from "react";
-import "./App.css";
-import TodoList from "./components/TodoList/TodoList";
-import NewTodo from "./components/NewTodo/NewTodo";
+import { Route, Switch } from "react-router-dom";
+import Home from "./Home";
+import About from "./components/About/About";
+import Navigation from "./components/Navigation/Navigation";
+import EditTodo from "./components/EditTodo/EditTodo";
+import WithError from "./hoc/WithError/WithError";
 
 class App extends Component {
-  state = { todolist: [] };
+  state = { alertType: "success", alertMessage: "", show: false };
 
-  updateMainList = todolist => {
+  showSuccessAlert = data => {
     this.setState({
-      todolist: todolist
+      alertType: "success",
+      alertMessage: data.message,
+      show: true
     });
-  };
-
-  updateStatus = item => {
-    const updatedList = this.state.todolist.map(todo => {
-      return item.id === todo.id
-        ? { ...todo, completed: !todo.completed }
-        : todo;
-    });
-    this.setState({
-      todolist: updatedList
-    });
+    setTimeout(() => {
+      this.setState({
+        show: false
+      });
+    }, 2000);
   };
   render() {
     return (
-      <div className="App">
-        <NewTodo
-          updateMainList={this.updateMainList}
-          todolist={this.state.todolist}
-        />
-        <TodoList
-          todolist={this.state.todolist}
-          updateStatus={this.updateStatus}
-        />
-        <TodoList
-          todolist={this.state.todolist}
-          updateStatus={this.updateStatus}
-          showCompleted={true}
-        />
-      </div>
+      <WithError alert={this.state}>
+        <Navigation />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route
+            path="/todo/:id/edit"
+            render={props => (
+              <EditTodo {...props} showSuccess={this.showSuccessAlert} />
+            )}
+          />
+        </Switch>
+      </WithError>
     );
   }
 }

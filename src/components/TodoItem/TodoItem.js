@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./TodoItem.css";
 
 const TodoItem = props => {
@@ -12,7 +13,7 @@ const TodoItem = props => {
           : {}
       }
     >
-      {item.title}
+      <Link to={`/todo/${item.id}/edit`}>{item.title}</Link>
       <input
         type="checkbox"
         checked={item.completed}
