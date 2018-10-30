@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TodoList from "./components/TodoList/TodoList";
 import NewTodo from "./components/NewTodo/NewTodo";
+import ProfilePic from "./components/ProfilePic/ProfilePic";
 import firebase from "./config/firebase";
 
 class Home extends Component {
@@ -54,6 +55,9 @@ class Home extends Component {
     }
     return (
       <div>
+        {firebase.auth() && firebase.auth().currentUser ? (
+          <ProfilePic user={firebase.auth().currentUser} />
+        ) : null}
         <NewTodo
           updateMainList={this.updateMainList}
           todolist={this.state.todolist}

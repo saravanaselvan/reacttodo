@@ -9,7 +9,7 @@ const Navigation = props => {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/about/">About</Link>
+          <Link to="/milk/">Milk</Link>
         </li>
         <li style={{ float: "right" }}>
           <a href="#" onClick={props.logout}>

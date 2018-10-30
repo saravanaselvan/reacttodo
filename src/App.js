@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import Home from "./Home";
-import About from "./components/About/About";
+import Milk from "./components/Milk/Milk";
 import Navigation from "./components/Navigation/Navigation";
 import EditTodo from "./components/EditTodo/EditTodo";
 import WithError from "./hoc/WithError/WithError";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Login from "./components/Login/Login";
-import { auth, provider } from "./config/firebase";
+import { auth } from "./config/firebase";
 
 class App extends Component {
   state = {
@@ -85,8 +85,8 @@ class App extends Component {
             authenticated={this.state.authenticated}
           />
           <PrivateRoute
-            path="/about"
-            component={About}
+            path="/milk"
+            component={Milk}
             authenticated={this.state.authenticated}
           />
           <Route
