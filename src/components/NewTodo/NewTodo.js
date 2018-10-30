@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./NewTodo.css";
-import { todoDB } from "../../config/firebase";
+import firebase from "../../config/firebase";
 
 class NewTodo extends Component {
   state = { todo: "" };
@@ -14,7 +14,10 @@ class NewTodo extends Component {
       completed: false
     };
     todolist.push(todo);
-    todoDB.push(todo);
+    firebase
+      .database()
+      .ref(`todos/${firebase.auth().currentUser.uid}`)
+      .push(todo);
 
     this.setState({
       todolist: todolist,

@@ -11,9 +11,12 @@ const Navigation = props => {
         <li>
           <Link to="/about/">About</Link>
         </li>
+        <li style={{ float: "right" }}>
+          <a href="#" onClick={props.logout}>
+            Log out
+          </a>
+        </li>
       </ul>
-      <button type="button" onClick={props.login}>Log In</button>
-      <button type="button" onClick={props.logout}>Log Out</button>
     </nav>
   );
 };

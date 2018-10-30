@@ -10,3 +10,10 @@
 .TodoList li {
   list-style: none;
 }
+
+.TodoList li a,
+.TodoList li a:visited,
+.TodoList li a:active {
+  text-decoration: none;
+  color: rgb(126, 105, 165);
+}

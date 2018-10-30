@@ -1,22 +1,28 @@
 import React, { Component } from "react";
 import TodoList from "./components/TodoList/TodoList";
 import NewTodo from "./components/NewTodo/NewTodo";
-import { todoDB } from "./config/firebase";
-
+import firebase from "./config/firebase";
 
 class Home extends Component {
-  state = { todolist: [] };
+  state = { todolist: [], loading: false };
 
   componentDidMount() {
-    todoDB.once("value", snapshot => {
-      const todolist = [];
-      snapshot.forEach(data => {
-        todolist.push({ ...data.val(), id: data.key });
+    this.setState({ loading: true });
+
+    firebase
+      .database()
+      .ref(`todos/${firebase.auth().currentUser.uid}`)
+      .once("value")
+      .then(snapshot => {
+        const todolist = [];
+        snapshot.forEach(data => {
+          todolist.push({ ...data.val(), id: data.key });
+        });
+        this.setState({
+          todolist: todolist
+        });
+        this.setState({ loading: false });
       });
-      this.setState({
-        todolist: todolist
-      });
-    });
   }
 
   updateMainList = todolist => {
@@ -31,7 +37,10 @@ class Home extends Component {
         ? { ...todo, completed: !todo.completed }
         : todo;
     });
-    const todo = todoDB.child(`${item.id}`);
+    const todo = firebase
+      .database()
+      .ref(`todos/${firebase.auth().currentUser.uid}`)
+      .child(`${item.id}`);
     todo.once("value", snapshot => {
       todo.update({ completed: !snapshot.val().completed });
     });
@@ -40,8 +49,11 @@ class Home extends Component {
     });
   };
   render() {
+    if (this.state.loading) {
+      return <p>Loading...</p>;
+    }
     return (
-      <div className="App">
+      <div>
         <NewTodo
           updateMainList={this.updateMainList}
           todolist={this.state.todolist}

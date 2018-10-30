@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import { todoDB } from "../../config/firebase";
-
+import firebase from "../../config/firebase";
 let todo;
 
 class EditTodo extends Component {
   state = { title: "", completed: false };
   componentDidMount() {
-    todo = todoDB.child(`${this.props.match.params.id}`);
+    todo = firebase
+      .database()
+      .ref(`todos/${firebase.auth().currentUser.uid}`)
+      .child(`${this.props.match.params.id}`);
     todo.once("value", snapshot => {
       this.setState(snapshot.val());
     });

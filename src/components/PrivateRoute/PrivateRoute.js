@@ -7,8 +7,6 @@ export default function PrivateRoute({
   authPending,
   ...rest
 }) {
-  console.log('private route');
-  if(authPending) return null;
   return (
     <Route
       {...rest}
@@ -16,7 +14,7 @@ export default function PrivateRoute({
         authenticated === true ? (
           <Component {...props} {...rest} />
         ) : (
-          <Redirect to="/about" />
+          <Redirect to="/login" />
         )
       }
     />
