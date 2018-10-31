@@ -16,7 +16,7 @@ class Login extends Component {
       <div>
         <Container style={{ height: "100vh", display: "flex" }}>
           <Row style={{ margin: "auto auto" }}>
-            <Col sm="12" md={{ size: 6, offset: 3 }}>
+            <Col sm="12" md={{ size: 12, offset: 3 }}>
               <Card style={{ textAlign: "center" }}>
                 <CardBody>
                   <button

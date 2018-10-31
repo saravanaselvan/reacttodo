@@ -133,7 +133,9 @@ class Milk extends Component {
                     </FormGroup>
                     <FormGroup check row>
                       <Col sm={{ size: 10, offset: 2 }}>
-                        <Button onClick={this.save}>Submit</Button>
+                        <Button color="primary" onClick={this.save}>
+                          Submit
+                        </Button>
                       </Col>
                     </FormGroup>
                   </Form>
@@ -149,39 +151,6 @@ class Milk extends Component {
             </Col>
           </Row>
         </Container>
-
-        {/* <form onSubmit={this.save}>
-          <div>
-            <label htmlFor="milk">Milk</label>
-            <input
-              type="number"
-              name="milk"
-              value={milk}
-              onChange={this.updateMilk}
-            />
-          </div>
-          <div>
-            <label htmlFor="water">Water</label>
-            <input
-              type="number"
-              name="milk"
-              value={water}
-              onChange={this.updateWater}
-            />
-          </div>
-          <div>
-            <label htmlFor="date">Date</label>
-            <input
-              type="date"
-              name="date"
-              value={browserDate}
-              onChange={this.updateDate}
-            />
-          </div>
-          <button type="submit" onClick={this.save}>
-            Save
-          </button>
-        </form> */}
       </div>
     );
   }

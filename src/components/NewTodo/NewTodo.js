@@ -21,11 +21,11 @@ class NewTodo extends Component {
       title: this.state.todo,
       completed: false
     };
-    todolist.push(todo);
-    firebase
+    todo.id = firebase
       .database()
       .ref(`todos/${firebase.auth().currentUser.uid}`)
-      .push(todo);
+      .push(todo).key;
+    todolist.push(todo);
 
     this.setState({
       todolist: todolist,
@@ -55,6 +55,7 @@ class NewTodo extends Component {
               />
               <InputGroupAddon addonType="append">
                 <Button
+                  color="primary"
                   className={`right-add-on ${buttonClass}`.trim()}
                   type="submit"
                   onClick={this.addTodo}
@@ -66,22 +67,6 @@ class NewTodo extends Component {
             </InputGroup>
           </FormGroup>
         </Form>
-        {/* <form onSubmit={this.addTodo}>
-          <input
-            className="right-button"
-            type="text"
-            value={this.state.todo}
-            onChange={this.updateTodo}
-          />
-          <button
-            className={`right-add-on ${buttonClass}`.trim()}
-            type="submit"
-            onClick={this.addTodo}
-            disabled={!this.state.todo}
-          >
-            Add
-          </button>
-        </form> */}
       </div>
     );
   }

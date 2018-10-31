@@ -13,8 +13,8 @@ import {
 
 const Navigation = props => {
   return (
-    <Navbar expand="md" light color="light">
-      <NavbarBrand href="/" className="mr-auto">
+    <Navbar expand="md">
+      <NavbarBrand tag={Link} to="/" className="mr-auto">
         To Do
       </NavbarBrand>
       <Collapse navbar>
