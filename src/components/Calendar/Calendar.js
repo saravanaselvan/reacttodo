@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import dateFns from "date-fns";
+import "./Calendar.css";
 
 class Calendar extends Component {
   state = {
@@ -11,15 +12,15 @@ class Calendar extends Component {
     const dateFormat = "MMMM YYYY";
     return (
       <div className="header row flex-middle">
-        <div className="col col-start">
+        <div className="calendar-col col-start">
           <div className="icon" onClick={this.prevMonth}>
             chevron_left
           </div>
         </div>
-        <div className="col col-center">
+        <div className="calendar-col col-center">
           <span>{dateFns.format(this.state.currentMonth, dateFormat)}</span>
         </div>
-        <div className="col col-end" onClick={this.nextMonth}>
+        <div className="calendar-col col-end" onClick={this.nextMonth}>
           <div className="icon">chevron_right</div>
         </div>
       </div>
@@ -31,7 +32,7 @@ class Calendar extends Component {
     let startDate = dateFns.startOfWeek(this.state.currentMonth);
     for (let i = 0; i < 7; i++) {
       days.push(
-        <div className="col col-center" key={i}>
+        <div className="calendar-col col-center" key={i}>
           {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
         </div>
       );
@@ -65,7 +66,7 @@ class Calendar extends Component {
         )[0];
         days.push(
           <div
-            className={`col cell ${
+            className={`calendar-col cell ${
               !dateFns.isSameMonth(day, monthStart)
                 ? "disabled"
                 : dateFns.isSameDay(day, selectedDate)
@@ -78,9 +79,9 @@ class Calendar extends Component {
             <span className="number">{formattedDate}</span>
             <span className="bg">{formattedDate}</span>
             {todayDetails ? (
-              <span>
-                <span>Milk: {todayDetails.milk}</span>
-                <span>Water: {todayDetails.water}</span>
+              <span className="details-wrapper">
+                <span className="detail">Milk: {todayDetails.milk}</span>
+                <span className="detail">Water: {todayDetails.water}</span>
               </span>
             ) : null}
           </div>

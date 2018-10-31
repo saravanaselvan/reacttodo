@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import TodoList from "./components/TodoList/TodoList";
 import NewTodo from "./components/NewTodo/NewTodo";
-import ProfilePic from "./components/ProfilePic/ProfilePic";
 import firebase from "./config/firebase";
+import { Container, Row, Col, Card, CardBody } from "reactstrap";
 
 class Home extends Component {
   state = { todolist: [], loading: false };
@@ -55,22 +55,29 @@ class Home extends Component {
     }
     return (
       <div>
-        {firebase.auth() && firebase.auth().currentUser ? (
-          <ProfilePic user={firebase.auth().currentUser} />
-        ) : null}
-        <NewTodo
-          updateMainList={this.updateMainList}
-          todolist={this.state.todolist}
-        />
-        <TodoList
-          todolist={this.state.todolist}
-          updateStatus={this.updateStatus}
-        />
-        <TodoList
-          todolist={this.state.todolist}
-          updateStatus={this.updateStatus}
-          showCompleted={true}
-        />
+        <Container>
+          <Row>
+            <Col sm="12" md={{ size: 6 }}>
+              <Card>
+                <CardBody>
+                  <NewTodo
+                    updateMainList={this.updateMainList}
+                    todolist={this.state.todolist}
+                  />
+                  <TodoList
+                    todolist={this.state.todolist}
+                    updateStatus={this.updateStatus}
+                  />
+                  <TodoList
+                    todolist={this.state.todolist}
+                    updateStatus={this.updateStatus}
+                    showCompleted={true}
+                  />
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }

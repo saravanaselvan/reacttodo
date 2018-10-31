@@ -77,6 +77,7 @@ class App extends Component {
         {this.state.user ? (
           <Navigation login={this.login} logout={this.logout} />
         ) : null}
+
         <Switch>
           <PrivateRoute
             exact

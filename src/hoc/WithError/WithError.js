@@ -4,7 +4,7 @@ import "../../App.css";
 
 const WithError = props => {
   return (
-    <div className="App">
+    <div>
       {props.alert.show ? <Alert {...props.alert} /> : null}
       {props.children}
     </div>

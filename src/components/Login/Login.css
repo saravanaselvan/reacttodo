@@ -1,0 +1,34 @@
+.google-sign-in {
+  background: #4285f4;
+  border: none;
+  padding: 1px;
+  height: 50px;
+  width: 240px;
+  border-radius: 1px;
+}
+
+.google-sign-in .icon-wrapper {
+  background: white;
+  float: left;
+  padding: 15px;
+  height: 48px;
+}
+
+.google-sign-in .icon-wrapper .icon {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  text-align: center;
+  margin-top: -11px;
+}
+
+.google-sign-in .login-text {
+  line-height: 48px;
+  font-family: Roboto, arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.21px;
+  margin-left: 6px;
+  margin-right: 6px;
+  vertical-align: top;
+}

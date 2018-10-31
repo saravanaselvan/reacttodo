@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import "./NewTodo.css";
 import firebase from "../../config/firebase";
+import {
+  Form,
+  FormGroup,
+  Input,
+  Button,
+  InputGroup,
+  InputGroupAddon
+} from "reactstrap";
 
 class NewTodo extends Component {
   state = { todo: "" };
@@ -36,7 +44,29 @@ class NewTodo extends Component {
     const buttonClass = !this.state.todo ? "button-disabled" : "";
     return (
       <div className="NewTodo">
-        <form onSubmit={this.addTodo}>
+        <Form>
+          <FormGroup>
+            <InputGroup>
+              <Input
+                className="right-button"
+                type="text"
+                value={this.state.todo}
+                onChange={this.updateTodo}
+              />
+              <InputGroupAddon addonType="append">
+                <Button
+                  className={`right-add-on ${buttonClass}`.trim()}
+                  type="submit"
+                  onClick={this.addTodo}
+                  disabled={!this.state.todo}
+                >
+                  Add
+                </Button>
+              </InputGroupAddon>
+            </InputGroup>
+          </FormGroup>
+        </Form>
+        {/* <form onSubmit={this.addTodo}>
           <input
             className="right-button"
             type="text"
@@ -51,7 +81,7 @@ class NewTodo extends Component {
           >
             Add
           </button>
-        </form>
+        </form> */}
       </div>
     );
   }
