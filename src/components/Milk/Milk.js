@@ -32,7 +32,7 @@ class Milk extends Component {
       .then(snapshot => {
         const tempDetails = [];
         snapshot.forEach(i => {
-          tempDetails.push(i.val());
+          tempDetails.push({ ...i.val(), id: i.key });
         });
         this.setState({
           allDetails: tempDetails
@@ -53,7 +53,6 @@ class Milk extends Component {
   };
 
   updateDate = event => {
-    console.log(event.target.value);
     const { value } = event.target;
     this.setState({
       browserDate: value,
@@ -68,14 +67,28 @@ class Milk extends Component {
       water: this.state.water,
       date: this.state.date
     };
-    firebase
-      .database()
-      .ref(`milk/${firebase.auth().currentUser.uid}`)
-      .push(milkDetail);
+
+    const availableItem = this.state.allDetails.filter(item => {
+      return (
+        dateFns.format(new Date(item.date), "DD/MM/YYYY") ===
+        dateFns.format(new Date(this.state.browserDate), "DD/MM/YYYY")
+      );
+    })[0];
+    const url = availableItem
+      ? `milk/${firebase.auth().currentUser.uid}/${availableItem.id}`
+      : `milk/${firebase.auth().currentUser.uid}`;
+    let newKey = availableItem ? availableItem.id : null;
+    const dbRef = firebase.database().ref(url);
+    availableItem
+      ? dbRef.update(milkDetail)
+      : (newKey = dbRef.push(milkDetail));
+    milkDetail.id = newKey;
     this.setState(state => {
-      const updatedDetails = state.allDetails;
+      const updatedDetails = state.allDetails.filter(
+        i => i.id != milkDetail.id
+      );
       updatedDetails.push(milkDetail);
-      return updatedDetails;
+      return { allDetails: updatedDetails };
     });
   };
 
