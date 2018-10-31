@@ -85,7 +85,7 @@ class Milk extends Component {
       <div>
         <Container>
           <Row>
-            <Col>
+            <Col md={6} sm={12}>
               <Card>
                 <CardBody>
                   <Form onSubmit={this.save}>
@@ -142,7 +142,7 @@ class Milk extends Component {
                 </CardBody>
               </Card>
             </Col>
-            <Col>
+            <Col sm={12} md={6}>
               <Card>
                 <CardBody>
                   <Calendar milkDetails={this.state.allDetails} />
